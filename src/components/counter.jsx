@@ -1,30 +1,33 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-function Counter() {
-  const [count, setCount] = useState(0)
-
+const Counter = ({value, id, name, onIncrement, onDecrement, onDelete}) => {
   return (
       <>
-        <span
-            className={`badge m-2 ${count === 0 ? 'bg-danger' : 'bg-primary'}`}
-        >
-          {count === 0 ? 'Ноль' : count}
+        <h4>{name}</h4>
+        <span className={`badge m-2 ${value === 0 ? 'bg-danger' : 'bg-primary'}`}>
+          {value === 0 ? 'Ноль' : value}
         </span>
         <button
             className='btn btn-secondary btn-sm'
             style={{marginRight: '0.5rem'}}
-            onClick={() => setCount(count + 1)}
+            onClick={onIncrement.bind(null, id)}
         >
           Increment
         </button>
         <button
             className='btn btn-secondary btn-sm'
-            onClick={() => count > 0 && setCount(count - 1)}
+            onClick={onDecrement.bind(null, id)}
         >
           Decrement
         </button>
+        <button
+            className='btn btn-danger btn-sm m-2'
+            onClick={onDelete.bind(null, id)}
+        >
+          Delete
+        </button>
       </>
   );
-}
+};
 
 export default Counter;
